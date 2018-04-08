@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Thymeleaf:Spring boot自带的前端模板</h1>
+    <h1>标签常用方法</h1>
+    <h3>复制+字符串拼接</h3>
+    <p th:text="${car.name}">车名:</p>
+    <span th:text="'车的传奇:'+${car.name}+'!'"></span>
+    <h5>字符串拼接简洁的写法</h5>
+    <span th:text="|车的传奇:${car.name}abc|"></span>
+
+    <h3>条件判断If/Unless</h3>
+    <span th:if="${car.price==8888}">8888恰好:if满足条件</span>
+    <span th:unless="${car.price==8880}">8880太贵:unless满足条件</span>
+    <span th:unless="${car.price==8888}">8888太贵:unless不满足条件</span>
+
+    <h3>for 循环</h3>
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>车名</th>
+            <th>价格</th>
+            <th>生产日期</th>
+        </tr>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.name}">车名</td>
+            <td th:text="${#numbers.formatDecimal(car.price,1,2)}">价格</td>
+            <td th:text="${#dates.format(car.createDate,'yyyy-MM-dd')}">生产日期</td>
+        </tr>
+    </table>
+
+    <h1>标准表达式语法</h1>
+    <h3>变量表达式</h3>
+    <span>变量表达式即OGNL表达式(对象导航语言)或Spring EL表达式（模型属性）</span>
+    <!--session 作用域 request 作用域-->
+    <p th:text="|session:${session.car.name} request:${car.name}|"></p>
+
+    <h3>选择(星号)表达式</h3>
+    <span th:text="*{car.name}"></span>
+    <div th:object="${car}">
+        <span th:text="*{price}"/><br>
+    </div>
+    <h3>url表达式</h3>
+    <a href="/hithymeleaf">原生</a>
+    <a href="/hithymeleaf?name=jack">原生带参</a>
+    <a href="/hithymeleaf?name=jack&price=120">原生带参</a>
+    <a th:href="@{/hithymeleaf}">Hello Thymeleaf</a><br>
+    <a th:href="@{/hithymeleaf(name=${car.name})}">Hello Thymeleaf带参</a><br>
+    <a th:href="@{/hithymeleaf(name=${car.name},price=120)}">Hello Thymeleaf带参</a><br>
+</div>
+
+<h1>布局</h1>
+<!--footer：被包含的文件名；copy：被包含文件中的fragment碎片的名字-->
+<div th:include="footer :: copy"></div>
+<div th:replace="footer :: copy"></div>
+</body>
+</html>
