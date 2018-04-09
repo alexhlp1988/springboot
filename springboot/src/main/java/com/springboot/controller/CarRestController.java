@@ -27,9 +27,7 @@ public class CarRestController {
             @DateTimeFormat(pattern = "yyyy-MM-dd") Date beginDate,
             @RequestParam(value = "endDate",required = false)
             @DateTimeFormat(pattern = "yyyy-MM-dd")Date endDate){
-        System.out.println(name+beginDate+endDate);
         List<Car> cars = carService.find(name, beginDate, endDate);
-        System.out.println(cars.size());
         if (cars.isEmpty()){
             return new ResponseEntity<>(new CustomType(400,"没有匹配的结果!"),HttpStatus.OK);
         }

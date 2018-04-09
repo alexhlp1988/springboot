@@ -81,7 +81,9 @@
             $.ajax({
                url:URL + "cars",
                type:"post",
+                //传json格式字符串到后台
                contentType:"application/json",
+                // 把 json 对象转换为 json 格式的字符串
                data: JSON.stringify(data),
                success:()=>{
                    window.location.reload();
@@ -102,7 +104,9 @@
             $.ajax({
                 url:URL + "cars",
                 type:"put",
+                //传json格式字符串到后台
                 contentType:"application/json",
+                // 把 json 对象转换为 json 格式的字符串
                 data: JSON.stringify(data),
                 success:()=>{
                     window.location.reload();
@@ -144,16 +148,16 @@
     }
     
     function fetchdata() {
+        //json对象
         var data = {
             "name": $("#carname").val(),
             "beginDate": $("#beginDate").val(),
             "endDate": $("#endDate").val()
         }
         $.ajax({
-            url:URL + "cars?name="+$("#carname").val()+"&beginDate="+$("#beginDate").val()+"&endDate="+$("#endDate").val(),
+            url:URL+"cars",
             type: "get",
-            // contentType:"application/json",
-            // data: JSON.stringify(data),
+            data: data,
             dataType:"json",
             success: function (data) {
                 if(data){
