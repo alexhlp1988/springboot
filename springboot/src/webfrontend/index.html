@@ -137,7 +137,7 @@
                 url:URL+"cars/"+id,
                 type:"delete",
                 success:()=>{
-                    $("#"+id).remove();
+                    window.location.reload();
                 }
             });
         }
