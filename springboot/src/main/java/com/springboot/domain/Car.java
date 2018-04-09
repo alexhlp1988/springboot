@@ -1,18 +1,44 @@
 package com.springboot.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
+import java.util.Date;
 
 public class Car implements Serializable {
     private static final long serialVersionUID = -8376431767548210751L;
+    private Integer id;
     private String name;
     private Double price;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")//前端传到后端日期格式
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")//后台传到前台日期格式
+    private Date createDate;
 
     public Car() {
     }
 
-    public Car(String name, Double price) {
+    public Car(Integer id, String name, Double price, Date createDate) {
+        this.id = id;
         this.name = name;
         this.price = price;
+        this.createDate = createDate;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public String getName() {
