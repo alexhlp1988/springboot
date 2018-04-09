@@ -24,6 +24,10 @@ public class CarService {
         return carMapper.findById(id);
     }
 
+    public List<Car> find(String name,Date beginDate,Date endDate) {
+        return carMapper.findByParam(name, beginDate, endDate);
+    }
+
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
     public int add(Car car){
         return carMapper.add(car);
